@@ -120,9 +120,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateQuestion() {
+        // Check if the quiz is finished
+        if (mAnsweredQuestions == mQuestionBank.length) {
+            // Disable the next and previous buttons when all questions are answered
+            mNextButton.setEnabled(false);
+            mPrevButton.setEnabled(false);
+        } else {
+            mNextButton.setEnabled(true);
+            mPrevButton.setEnabled(true);
+        }
+
         int question = mQuestionBank[mCurrentIndex].getTextResId();
         mQuestionTextView.setText(question);
-
 
         if (mAnsweredQuestionsArray[mCurrentIndex]) {
             disableAnswerButtons();
@@ -135,7 +144,6 @@ public class MainActivity extends AppCompatActivity {
         boolean answerIsTrue = mQuestionBank[mCurrentIndex].isAnswerTrue();
         int messageResId = 0;
 
-
         if (userPressedTrue == answerIsTrue) {
             messageResId = R.string.correct_toast;
             mCorrectAnswers++;
@@ -143,12 +151,16 @@ public class MainActivity extends AppCompatActivity {
             messageResId = R.string.incorrect_toast;
         }
 
-        Toast.makeText(this, messageResId, Toast.LENGTH_SHORT)
-                .show();
+        Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show();
         mAnsweredQuestions++;
         mAnsweredQuestionsArray[mCurrentIndex] = true;
         lockCurrentQuestion(mCurrentIndex);
         disableAnswerButtons();
+
+        // Check if all questions are answered
+        if (mAnsweredQuestions == mQuestionBank.length) {
+            showScore(); // Show the score if all questions are answered
+        }
     }
 
     private void disableAnswerButtons() {
@@ -165,8 +177,11 @@ public class MainActivity extends AppCompatActivity {
         int percentage = (int) (((double) mCorrectAnswers / mQuestionBank.length) * 100);
         String message = "Your score: " + percentage + "%";
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+
+        // Reset the quiz state to start over
         resetQuizState();
     }
+
 
     private void lockCurrentQuestion(int currentIndex) {
         if (mQuestionBankLocked != null) {
@@ -181,12 +196,20 @@ public class MainActivity extends AppCompatActivity {
         mCurrentIndex = 0;
         mCorrectAnswers = 0;
         mAnsweredQuestions = 0;
+
+        // Reset the arrays for answered and locked questions
         for (int i = 0; i < mAnsweredQuestionsArray.length; i++) {
             mAnsweredQuestionsArray[i] = false;
             mLockedQuestionsArray[i] = false;
         }
+
+        // Enable the answer buttons again
+        enableAnswerButtons();
+
+        // Update the question view
         updateQuestion();
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
