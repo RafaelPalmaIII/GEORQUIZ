@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace = "com.bignerdranch.andriod.georquiz"
+    namespace = "com.bignerdranch.android.geoquiz"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.bignerdranch.andriod.georquiz"
+        applicationId = "com.bignerdranch.android.geoquiz"
         minSdk = 33
         targetSdk = 35
         versionCode = 1

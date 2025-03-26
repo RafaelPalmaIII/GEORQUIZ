@@ -1,68 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:paddingBottom="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
+    tools:context=".MainActivity"
+    android:background="#D1C4E9">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:title="@string/app_name"
+        android:titleTextColor="@android:color/white"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:elevation="4dp"
+        tools:ignore="MissingConstraints" />
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_marginTop="56dp">
 
         <TextView
-            android:id="@+id/question_text_view"
+            android:id="@+id/question_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:padding="24dp" />
+            android:padding="24dp"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|center_horizontal"
-            android:orientation="horizontal" >
-            <Button
-                android:id="@+id/true_button"
+            android:orientation="vertical">
+
+            <LinearLayout
+                style="?android:attr/buttonBarStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/true_button" />
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/true_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/true_button"
+                    tools:ignore="ButtonStyle" />
+
+                <Button
+                    android:id="@+id/false_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/false_button"
+                    tools:ignore="ButtonStyle" />
+
+            </LinearLayout>
+
             <Button
-                android:id="@+id/false_button"
+                android:id="@+id/cheat_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/false_button" />
+                android:layout_gravity="center_horizontal"
+                android:text="@string/cheat_button"
+                tools:ignore="ButtonStyle" />
+
+            <Button
+                android:id="@+id/submit_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/submit_button"
+                tools:ignore="ButtonStyle" />
 
         </LinearLayout>
 
-        <LinearLayout
-            style="?android:attr/buttonBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="67dp"
-            android:orientation="horizontal">
+        <ImageButton
+            android:id="@+id/prev_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="bottom|left"
+            android:src="@drawable/arrow_left"
+            android:contentDescription="@string/prev_button"
+            android:background="@android:color/transparent" />
 
-            <ImageButton
-                android:id="@+id/prev_button"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_gravity="bottom|right"
-                android:src="@drawable/arrow_left"
-                android:contentDescription="@string/prev_button"
-                android:background="?android:attr/selectableItemBackground"
-                android:layout_marginEnd="8dp" />
-
-            <ImageButton
-                android:id="@+id/next_button"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_gravity="bottom|right"
-                android:src="@drawable/arrow_right"
-                android:contentDescription="@string/next_button"
-                android:background="?android:attr/selectableItemBackground"
-                android:layout_marginStart="8dp" />
-
-
-        </LinearLayout>
+        <ImageButton
+            android:id="@+id/next_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="bottom|right"
+            android:src="@drawable/arrow_right"
+            android:contentDescription="@string/next_button"
+            android:background="@android:color/transparent" />
 
     </FrameLayout>
 
